@@ -1,6 +1,6 @@
 # ES6 const & let
 ## test
 ```js
-const
-let
+const b ='456';
+let a = '123';
 ```
