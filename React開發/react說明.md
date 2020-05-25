@@ -506,7 +506,7 @@ class App extends Component{
   - mapStateToProps (定義reducer,state資料)
     - 將store中,state資料轉換為該元件的組件 
   - mapDispatchToProps((定義reducer,事件)
-    - 456
+  
 ```js
 // 子組件<TodoList />
 
@@ -517,12 +517,44 @@ class TodoList extends Component {
   ...
 }
 
-const mapStateToProps = () =>{
+const mapStateToProps = (state) =>{
     return{
-
+      state
     }
 }
 
 // 在輸出時調用connect
 export default connect(mapStateToProps,)(TodoList)
+```
+
+## React引入組件:props.children
+- 可以使用props.children將元件引入
+<p>像是要將容器外層統一用一個元件管理css(padding),就可以使用</p>
+
+```js
+// 父元件
+const PaddingContainer: React.FC = (props) => {
+    const classes = useStyles()
+    return (
+        // props.children為要引入的子元件
+        <div className={classes.paddingContainer}>
+            {props.children}
+        </div>
+    )
+}
+```
+<p>引入後(imp)就可以將包在裡面的子元件傳遞到父元件中</p>
+
+```js
+// 子元件
+
+import PaddingContainer from '../components/index'
+
+return (
+  <PaddingContainer>
+    <Grid>
+      test
+    </Grid>
+  </PaddingContainer>
+)
 ```
