@@ -94,3 +94,30 @@ const memoizedCallback = useCallback(() => {
 ## useMemo 
 - 類似useCallback
 - 在dependencies沒有改動的情況下,將return的值保存下來
+
+## useContext
+- 類似redux簡化版的資料傳遞
+```js
+const stateContext = React.createContext()
+const getContextValue = () => {
+    return{
+        state: 1
+    }
+}
+// 包覆在最上層,並將資料透過value傳遞
+<stateContext.Provider value={getContextValue()} >
+    <App />
+</stateContext.Provider >
+```
+子層調用
+```js
+// App
+import React, { useContext } from 'react'
+const App = () => {
+    const stateContext = React.createContext()
+    const context = useContext(stateContext)
+    return(
+        <h1>{context.state}</h1> // 1
+    )
+}
+```

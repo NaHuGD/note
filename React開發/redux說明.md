@@ -39,7 +39,7 @@ store.subscribe(function(){
 - 允許透過getState()取得資料狀態
 - 允許透過dispatch(action)更新state
 
-combineReducers(合併reducer功能)
+### combineReducers(合併reducer功能)
 ```js
 const { createStore,combineReducers } = Redux;
 
@@ -83,6 +83,15 @@ store.dispatch({
     type: 'set',
     name: '瘦虎'
 })
+```
+- ### 使用combineReducers合併reducers時,他會將reducer中的陣列{}解開,所以reducer回傳時不用再回傳物件
+```js
+case "TEST": {
+    return {
+        ...state,
+        receiptType: action.receiptType
+    }
+}
 ```
 
 # 搭配react,react redux
@@ -130,6 +139,10 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps)(App)
 ```
+## mapStateToProps
+- mapStateToProps負責建立組件store跟state的映射關係 (連結資料)
+## mapDispatchToProps
+- mapDispatchProps定義組件如何發出store.dispatch(action) (連結事件)
 ## 封裝/分離react redux
 - 將redux會用到的資料另開到store資料夾下
 ```js
@@ -186,3 +199,4 @@ const user = (state = '未知', action) => {
 
 export default user
 ```
+
